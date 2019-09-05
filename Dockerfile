@@ -1,4 +1,4 @@
-FROM loxoo/alpine:latest
+FROM loxoo/alpine:3.10
 
 ENV PERL_MM_USE_DEFAULT=1 \
     PATH="/opt/knot/sbin:$PATH"
