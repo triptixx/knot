@@ -3,8 +3,6 @@ FROM loxoo/alpine:latest
 ENV PERL_MM_USE_DEFAULT=1 \
     PATH="/opt/knot/sbin:$PATH"
 
-SHELL ["/bin/sh", "-exc"]
-
 RUN apk upgrade --no-cache; \
     apk add --no-cache tzdata perl userspace-rcu gnutls libedit; \
     apk add --no-cache --virtual=.build-deps build-base perl-dev libressl libressl-dev libidn-dev zlib-dev git autoconf automake libtool gnutls-dev userspace-rcu-dev libedit-dev; \
