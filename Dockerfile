@@ -6,8 +6,10 @@ ARG KNOT_VER
 
 ### install knot
 WORKDIR /knot-src
-RUN apk add --no-cache build-base git autoconf automake libtool gnutls-dev userspace-rcu-dev protobuf-c-dev \
-        fstrm-dev libedit-dev libidn-dev; \
+RUN apk add --no-cache \
+        build-base git autoconf automake \
+        libtool gnutls-dev userspace-rcu-dev \
+        protobuf-c-dev fstrm-dev libedit-dev libidn-dev; \
     git clone https://gitlab.labs.nic.cz/knot/knot-dns --branch v${KNOT_VER} --depth 1 .; \
     autoreconf -if; \
     ./configure --prefix=/ \
