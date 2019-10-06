@@ -11,8 +11,8 @@ RUN apk add --no-cache \
         libtool gnutls-dev userspace-rcu-dev \
         protobuf-c-dev fstrm-dev libedit-dev libidn-dev; \
     git clone https://gitlab.labs.nic.cz/knot/knot-dns --branch v${KNOT_VER} --depth 1 .; \
-    autoreconf -if; \
-    ./configure --prefix=/ \
+    autoreconf -sif; \
+    ./configure --prefix=/knot \
                 --with-rundir=/rundir \
                 --with-storage=/storage \
                 --with-configdir=/config \
