@@ -24,8 +24,16 @@ RUN apk add --no-cache \
     make install DESTDIR=/output; \
     find /output -exec sh -c 'file "{}" | grep -q ELF && strip --strip-debug "{}"' \;
 
+### install modules perl
+WORKDIR /output
+RUN apk add --no-cache \
+        perl-dev libressl libressl-dev zlib-dev; \
+    perl -MCPAN -e "install XML::RPC"; \
+    perl -MCPAN -e "install Net::DNS"; \
+    cp -a --parents /usr/local/share/perl5/site_perl .
+
 ADD entrypoint.sh /output/usr/local/bin/
-RUN chmod +x /output/usr/local/bin/entrypoint.sh
+RUN chmod +x /output/usr/local/bin/entrypoint.sh /output
 
 #=============================================================
 
@@ -41,4 +49,4 @@ LABEL org.label-schema.name="knot" \
 
 COPY --from=builder /output/ /
 
-RUN apk add --no-cache gnutls userspace-rcu protobuf-c fstrm-dev libedit libidn
+RUN apk add --no-cache gnutls userspace-rcu protobuf-c fstrm-dev libedit libidn perl
