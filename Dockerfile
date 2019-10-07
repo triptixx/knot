@@ -50,4 +50,4 @@ LABEL org.label-schema.name="knot" \
 
 COPY --from=builder /output/ /
 
-RUN apk add --no-cache gnutls userspace-rcu protobuf-c fstrm-dev libedit libidn perl
+RUN apk add --no-cache gnutls userspace-rcu protobuf-c fstrm libedit libidn perl
