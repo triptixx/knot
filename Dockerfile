@@ -7,10 +7,9 @@ ARG PERL_MM_USE_DEFAULT=1
 
 ### install knot
 WORKDIR /knot-src
-RUN apk add --no-cache \
-        build-base git autoconf automake \
-        libtool gnutls-dev userspace-rcu-dev \
-        protobuf-c-dev fstrm-dev libedit-dev libidn-dev; \
+RUN apk add --no-cache build-base git autoconf automake \
+        libtool gnutls-dev userspace-rcu-dev protobuf-c-dev \
+        fstrm-dev libedit-dev libidn-dev; \
     git clone https://gitlab.labs.nic.cz/knot/knot-dns --branch v${KNOT_VER} --depth 1 .; \
     autoreconf -sif; \
     ./configure --prefix=/knot \
@@ -27,14 +26,13 @@ RUN apk add --no-cache \
 
 ### install modules perl
 WORKDIR /output
-RUN apk add --no-cache \
-        perl-dev libressl libressl-dev zlib-dev; \
+RUN apk add --no-cache perl-dev libressl libressl-dev zlib-dev; \
     perl -MCPAN -e "install XML::RPC"; \
     perl -MCPAN -e "install Net::DNS"; \
     cp -a --parents /usr/local/share/*/site_perl .
 
-#ADD entrypoint.sh /output/usr/local/bin/
-#RUN chmod +x /output/usr/local/bin/entrypoint.sh /output
+#COPY *.sh /output/usr/local/bin/
+#RUN chmod +x /output/usr/local/bin/entrypoint.sh
 
 #=============================================================
 
