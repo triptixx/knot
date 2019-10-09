@@ -4,6 +4,7 @@ FROM loxoo/alpine:3.10 AS builder
 
 ARG KNOT_VER
 ARG PERL_MM_USE_DEFAULT=1
+ARG GOPATH=/supercronic-src
 
 ### install knot
 WORKDIR /knot-src
@@ -31,8 +32,22 @@ RUN apk add --no-cache perl-dev libressl libressl-dev zlib-dev; \
     perl -MCPAN -e "install Net::DNS"; \
     cp -a --parents /usr/local/share/*/site_perl .
 
+### install supercronic
+WORKDIR /supercronic-src
+RUN apk add --no-cache git go upx; \
+    go get -d -u github.com/golang/dep; \
+    cd ${GOPATH}/src/github.com/golang/dep; \
+    DEP_LATEST=$(git describe --abbrev=0 --tags); \
+    git checkout $DEP_LATEST; \
+    go build -o ${GOPATH}/dep -ldflags="-X main.version=$DEP_LATEST" ./cmd/dep; \
+    go get -d -u github.com/aptible/supercronic; \
+    cd ${GOPATH}/src/github.com/aptible/supercronic; \
+    ${GOPATH}/dep ensure -vendor-only; \
+    go build -ldflags "-s -w" -o /output/supercronic/supercronic; \
+    upx /output/supercronic/supercronic
+
 #COPY *.sh /output/usr/local/bin/
-#RUN chmod +x /output/usr/local/bin/entrypoint.sh
+#RUN chmod +x /output/usr/local/bin/*.sh
 
 #=============================================================
 
