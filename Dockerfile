@@ -47,8 +47,8 @@ RUN apk add --no-cache git go upx; \
     upx /output/supercronic/supercronic
 
 COPY *.pl /output/supercronic/
-#COPY *.sh /output/usr/local/bin/
-#RUN chmod +x /output/usr/local/bin/*.sh
+COPY *.sh /output/usr/local/bin/
+RUN chmod +x /output/usr/local/bin/*.sh
 
 #=============================================================
 
@@ -65,3 +65,13 @@ LABEL org.label-schema.name="knot" \
 COPY --from=builder /output/ /
 
 RUN apk add --no-cache gnutls userspace-rcu protobuf-c fstrm libedit libidn perl
+
+VOLUME ["/rundir", "/storage", "/config"]
+
+EXPOSE 53/TCP 53/UDP
+
+HEALTHCHECK --start-period=10s --timeout=5s \
+    CMD wget -qO /dev/null 'http://localhost:53'
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["/knot/sbin/knotd"]
