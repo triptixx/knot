@@ -46,6 +46,7 @@ RUN apk add --no-cache git go upx; \
     go build -ldflags "-s -w" -o /output/supercronic/supercronic; \
     upx /output/supercronic/supercronic
 
+COPY *.pl /output/supercronic/
 #COPY *.sh /output/usr/local/bin/
 #RUN chmod +x /output/usr/local/bin/*.sh
 
