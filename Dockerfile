@@ -71,7 +71,7 @@ VOLUME ["/rundir", "/storage", "/config"]
 EXPOSE 53/TCP 53/UDP
 
 HEALTHCHECK --start-period=10s --timeout=5s \
-    CMD /knot/sbin/knotc status
+    CMD /knot/sbin/knotc status version
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["/knot/sbin/knotd"]
