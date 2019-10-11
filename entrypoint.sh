@@ -9,7 +9,7 @@ RESET='\033[0m'
 CONFIG_DIR='/rundir;/storage;/config'
 
 for FOLD in `echo $FOLDS | tr ';' '\n'`; do
-    if su-exec -e [ ! -w "$CONFIG_DIR" ]; then
+    if su-exec $SUID:$SGID [ ! -w "$CONFIG_DIR" ]; then
         2>&1 echo -e "${RED}####################### WARNING #######################${RESET}"
         2>&1 echo
         2>&1 echo -e "${RED}     No permission to write in '$CONFIG_DIR' directory.${RESET}"
