@@ -25,7 +25,7 @@ done
 exec su-exec $SUID:$SGID sh <<EOF
 
 if [ ! -e "\$PREF_FILE" ]; then
-    source gen-config.sh
+    source /usr/local/bin/gen-config.sh
 fi
 
 exec "$@"
