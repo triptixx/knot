@@ -21,3 +21,13 @@ for FOLD in `echo $FOLDS | tr ';' '\n'`; do
         chown $SUID:$SGID "$CONFIG_DIR"
     fi
 done
+
+exec su-exec 900 sh <<EOF
+
+if [ ! -e "\$PREF_FILE" ]; then
+    source gen-config.sh
+fi
+
+exec "$@"
+
+EOF
