@@ -25,7 +25,7 @@ done
 exec su-exec $SUID:$SGID sh <<EOF
 
 if [ ! \( -e /config/*.zone \) -o ! \( -e /config/knot.conf \) ]; then
-    source /usr/local/bin/gen-config.sh
+    /usr/local/bin/gen-config.sh
 fi
 
 exec "$@"
