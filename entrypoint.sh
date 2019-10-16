@@ -22,7 +22,7 @@ for FOLD in `echo $FOLDS | tr ';' '\n'`; do
     fi
 done
 
-exec su-exec 900 sh <<EOF
+exec su-exec $SUID:$SGID sh <<EOF
 
 if [ ! -e "\$PREF_FILE" ]; then
     source gen-config.sh
