@@ -23,6 +23,7 @@ RUN apk add --no-cache build-base git autoconf automake \
                 --disable-documentation; \
     make; \
     make install DESTDIR=/output; \
+    rm -rf /rundir/* /storage/* /config/*; \
     find /output -exec sh -c 'file "{}" | grep -q ELF && strip --strip-debug "{}"' \;
 
 ### install modules perl
