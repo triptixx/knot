@@ -13,7 +13,6 @@ my $version = $api->call('version.info', $apikey);
 print "  Found API version: $version->{'api_version'}\n";
 
 my $domains = $api->call('domain.list', $apikey);
-
 chomp(my @domain = `/knot/sbin/knotc conf-read zone.domain | awk '{print \$NF}'`);
 
 for(@domain) {
