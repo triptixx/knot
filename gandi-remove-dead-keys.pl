@@ -7,7 +7,11 @@ use Data::Dumper;
 my $endpoint = $ENV{'ENDPOINT'} || die "no endpoint in environnement system\n";
 my $apikey = $ENV{'APIKEY'} || die "no apikey in environnement system\n";
 
+print "Connecting to Gandi API endpoint $endpoint\n";
 my $api = XML::RPC->new($endpoint);
+my $version = $api->call('version.info', $apikey);
+print "  Found API version: $version->{'api_version'}\n";
+
 my $domains = $api->call('domain.list', $apikey);
 
 chomp(my @domain = `/knot/sbin/knotc conf-read zone.domain | awk '{print \$NF}'`);
