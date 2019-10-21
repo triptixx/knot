@@ -1,6 +1,7 @@
 # knot
 
-
+SUID
+SGID
 ENDPOINT
 APIKEY
 domain
