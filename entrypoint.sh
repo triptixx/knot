@@ -23,6 +23,8 @@ done
 
 exec su-exec $SUID:$SGID sh <<EOF
 
+echo -e "# do daily/weekly/monthly maintenance\n# min   hour    day     month   weekday command\n*/30    *       *       *       *       perl /opt/knot/gandi-publish-ds\n*/45    *       *       *       *       perl /opt/knot/gandi-remove-dead-keys" > "/etc/crontabs/knot";
+
 if [ ! \( -e /config/*.zone \) -o ! \( -e /config/knot.conf \) ]; then
     /usr/local/bin/gen-config.sh
 fi
