@@ -129,7 +129,7 @@ if [ ! -e /config/*.zone ]; then
         while read -r name; do
             TXTZONE="${TXTZONE}\n${name%%.*} IN CNAME @"
         done << EOA
-        $(echo "$CNAME" | tr ',' '\n')
+$(echo "$CNAME" | tr ',' '\n')
 EOA
     fi
 
