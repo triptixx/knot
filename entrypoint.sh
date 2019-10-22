@@ -23,10 +23,15 @@ done
 
 exec su-exec $SUID:$SGID sh <<EOF
 
-echo -e "# do daily/weekly/monthly maintenance\n# min   hour    day     month   weekday command\n*/30    *       *       *       *       perl /opt/knot/gandi-publish-ds\n*/45    *       *       *       *       perl /opt/knot/gandi-remove-dead-keys" > "/etc/crontabs/knot";
-
 if [ ! \( -e /config/*.zone \) -o ! \( -e /config/knot.conf \) ]; then
     /usr/local/bin/gen-config.sh
+fi
+
+if [ \( -n "$ENDPOINT" \) -a \( -n "$APIKEY" \) ]; then
+    echo -e '*/10 * * * * perl /supercronic/gandi-publish-ds\n\
+*/15 * * * * perl /supercronic/gandi-remove-dead-keys' > /supercronic/knot-cron
+
+    /supercronic/supercronic /supercronic/knot-cron &
 fi
 
 exec "$@"
