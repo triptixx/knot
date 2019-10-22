@@ -75,4 +75,4 @@ HEALTHCHECK --start-period=10s --timeout=5s \
     CMD /knot/bin/kdig @127.0.0.1 -p 53 +short +time=1 +retry=0 localhost A
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["/knot/sbin/knotd"]
+CMD ["/knot/sbin/knotd", "-c", "/config/knot.conf"]
