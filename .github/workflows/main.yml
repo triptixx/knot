@@ -19,7 +19,8 @@ jobs:
         with:
           verbose: true
           repo: knot-dev
-          run:
+          run_args: -e DOMAIN=example.com -e NS2=ns2.example.com
+          run: /knot/bin/kdig @127.0.0.1 -p 53 +short +time=1 +retry=0 localhost A
       - name: publish
         uses: triptixx/action-docker-publish@master
         with:
@@ -27,4 +28,4 @@ jobs:
           docker_password: ${{ secrets.docker_password }}
           from: knot-dev
           repo: ${{ secrets.docker_username }}/knot
-          tags: 2.5,latest
+          tags: latest
