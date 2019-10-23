@@ -7,38 +7,24 @@ on:
 jobs:
   alpine:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        alpine_tag:
-          - '3.7'
-          - '3.8'
-          - '3.9'
-          - '3.10,latest'
-          - 'edge'
     steps:
       - name: clone
         uses: actions/checkout@master
-      - name: set vars
-        id: vars
-        run: |
-          ALPINE_TAG=${{ matrix.alpine_tag }}
-          echo ::set-output name=alpine_tag::${ALPINE_TAG%%,*}
       - name: build
         uses: triptixx/action-docker-build@master
         with:
-          repo: alpine-dev
-          build_args: ALPINE_TAG=${{ steps.vars.outputs.alpine_tag }}
+          repo: knot-dev
       - name: test
         uses: triptixx/action-docker-test@master
         with:
           verbose: true
-          repo: alpine-dev
-          run: su-exec nobody apk --version
+          repo: knot-dev
+          run:
       - name: publish
         uses: triptixx/action-docker-publish@master
         with:
           docker_username: ${{ secrets.docker_username }}
           docker_password: ${{ secrets.docker_password }}
-          from: alpine-dev
-          repo: ${{ secrets.docker_username }}/alpine
-          tags: ${{ matrix.alpine_tag }}
+          from: knot-dev
+          repo: ${{ secrets.docker_username }}/knot
+          tags: 2.5,latest
