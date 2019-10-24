@@ -34,6 +34,6 @@ if [ \( -n "$ENDPOINT" \) -a \( -n "$APIKEY" \) ]; then
     /supercronic/supercronic /supercronic/knot-cron &
 fi
 
-exec "$@"
-
 EOF
+
+exec "$@"
