@@ -24,7 +24,7 @@ server:
     identity:
     version:
     nsid:
-    user: ${SUID}:${SGID}
+    user: knot:knot
     listen: 0.0.0.0@53
 
 remote:
