@@ -21,10 +21,10 @@ for DIR in `echo $CONFIG_DIR | tr ';' '\n'`; do
     fi
 done
 
-exec su-exec $SUID:$SGID sh <<EOF
+su-exec $SUID:$SGID sh <<EOF
 
 if [ ! \( -e /config/*.zone \) -o ! \( -e /config/knot.conf \) ]; then
-    /usr/local/bin/gen-config.sh
+    source /usr/local/bin/gen-config.sh
 fi
 
 if [ \( -n "$ENDPOINT" \) -a \( -n "$APIKEY" \) ]; then
