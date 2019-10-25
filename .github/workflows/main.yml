@@ -29,5 +29,5 @@ jobs:
           docker_password: ${{ secrets.docker_password }}
           from: knot-dev
           repo: ${{ secrets.docker_username }}/knot
-          tags: latest
+          tags: latest,2.8.4
           test: true
