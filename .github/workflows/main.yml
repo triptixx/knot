@@ -30,4 +30,4 @@ jobs:
           from: knot-dev
           repo: ${{ secrets.docker_username }}/knot
           tags: 2.8.4
-          test_tag: '%label org.label-schema.version | %auto'
+          test_tag: '%label org.label-schema.version'
