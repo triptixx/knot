@@ -30,4 +30,4 @@ jobs:
           from: knot-dev
           repo: ${{ secrets.docker_username }}/knot
           tags: 2.8.4
-          test_tag: 2.8.4
+          test_tag: '%label 2.8.4 | %auto'
