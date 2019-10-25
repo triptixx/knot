@@ -1,5 +1,3 @@
-# knot
-
 [hub]: https://hub.docker.com/r/loxoo/knot
 [mbdg]: https://microbadger.com/images/loxoo/knot
 [git]: https://github.com/triptixx/knot
