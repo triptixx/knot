@@ -29,4 +29,4 @@ jobs:
           docker_password: ${{ secrets.docker_password }}
           from: knot-dev
           repo: ${{ secrets.docker_username }}/knot
-          tags: latest,'%label org.label-schema.version | %auto'
+          tags: latest,%label org.label-schema.version | %auto
