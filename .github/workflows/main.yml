@@ -30,4 +30,3 @@ jobs:
           from: knot-dev
           repo: ${{ secrets.docker_username }}/knot
           tags: latest,2.8.4
-          test: true
