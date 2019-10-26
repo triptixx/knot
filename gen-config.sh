@@ -72,7 +72,7 @@ zone:
 
 log:
   - target: stdout
-    any: info
+    any: ${LOG_LEVEL:-info}
 EOL
 
 fi
