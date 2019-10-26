@@ -23,14 +23,9 @@ done
 
 su-exec $SUID:$SGID sh <<EOF
 
-if [ ! \( -e /config/*.zone \) -o ! \( -e /config/knot.conf \) ]; then
-    source /usr/local/bin/gen-config.sh
-fi
+source /usr/local/bin/gen-config.sh
 
-if [ \( -n "$ENDPOINT" \) -a \( -n "$APIKEY" \) ]; then
-    echo -e '*/10 * * * * perl /supercronic/gandi-publish-ds\n\
-*/15 * * * * perl /supercronic/gandi-remove-dead-keys' > /supercronic/knot-cron
-
+if [ \( -n "$ENDPOINT" \) -a \( -n "$APIKEY" \) -a \( -f /supercronic/knot-cron \) ]; then
     /supercronic/supercronic /supercronic/knot-cron &
 fi
 
