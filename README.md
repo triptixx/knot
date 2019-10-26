@@ -26,5 +26,12 @@
 - `$LOG_LEVEL`    - Logging severity levels. _default: `info`_
 - `$TZ`           - Timezone. _optional_
 
+## Volume
+
+- 
+- 
+
 ## Network
 
+- `53/udp`        - Dns port udp.
+- `53/tcp`        - Dns port tcp.
