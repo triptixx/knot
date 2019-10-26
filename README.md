@@ -13,7 +13,7 @@
 
 ## Usage
 
-### [Environment]
+## Environment
 
 - `$SUID`                 - User ID to run as. _default: `900`_
 - `$SGID`                 - Group ID to run as. _default: `900`_
