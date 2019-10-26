@@ -21,3 +21,4 @@ domain
 ns2
 mx
 cname
+LOG_LEVEL
