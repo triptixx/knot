@@ -25,7 +25,7 @@ su-exec $SUID:$SGID sh <<EOF
 
 source /usr/local/bin/gen-config.sh
 
-if [ \( -n "$ENDPOINT" \) -a \( -n "$APIKEY" \) -a \( -f /supercronic/knot-cron \) ]; then
+if [ \( -n "$ENDPOINT" \) -a \( -n "$APIKEY" \) -a \( -e /supercronic/knot-cron \) ]; then
     /supercronic/supercronic /supercronic/knot-cron &
 fi
 
