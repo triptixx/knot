@@ -27,7 +27,7 @@ docker run -d \
     -v /rundir:/rundir \
     loxoo/knot
 ```
-Si vous êtes abonné au registrar Gandi, vous pouvez utiliser les variables $ENDPOINT et $APIKEY qui déclencheront une configuration cron pour automatiser les taches d'enregistrement DNSSEC :
+If you subscribe to the Gandi registrar, you can use the $ENDPOINT and $APIKEY variables that will trigger a cron configuration to automate DNSSEC registration tasks :
 ```shell
 docker run -d \
     --name=srvknot \
