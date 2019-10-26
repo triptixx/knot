@@ -21,8 +21,8 @@
 - `$NS2`          - Fqdn name of slave server zone. _required_
 - `$MX`           - Name of mail server. _optional_
 - `$CNAME`        - Name of different subdomain. _optional_
-- `ENDPOINT`      - Name server of Gandi API. _optional_
-- `APIKEY`        - Authentication Gandi API Key. _optional_
+- `$ENDPOINT`      - Name server of Gandi API. _optional_
+- `$APIKEY`        - Authentication Gandi API Key. _optional_
 - `$LOG_LEVEL`    - Logging severity levels. _default: `info`_
 - `$TZ`           - Timezone. _optional_
 
