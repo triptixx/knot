@@ -1,4 +1,4 @@
-ARG KNOT_VER="2.8.4"
+ARG KNOT_VER="2.9.0"
 
 FROM loxoo/alpine:3.10 AS builder
 
