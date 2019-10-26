@@ -13,6 +13,19 @@
 
 ## Usage
 
+```shell
+docker run -d \
+    --name=srvknot \
+    --restart=unless-stopped \
+    --hostname=my-plex-server \
+    -p 32400:32400 \
+    -e PLEX_CLAIM=claim-xxxx... \
+    -v /config/plex:/config \
+    -v /transcode:/transcode \
+    -v /media:/media \
+    spritsail/plex-media-server
+```
+
 ## Environment
 
 - `$SUID`         - User ID to run as. _default: `900`_
