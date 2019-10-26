@@ -11,9 +11,9 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/loxoo/knot.svg)][hub]
 [![Build Status](https://github.com/triptixx/knot/workflows/docker%20build/badge.svg)][actions]
 
-### Usage
+### [Usage]
 
-### Environment
+### [Environment]
 
 - `$SUID`                 - User ID to run as. _default: `900`_
 - `$SGID`                 - Group ID to run as. _default: `900`_
