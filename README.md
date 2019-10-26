@@ -12,6 +12,11 @@
 [![Build Status](https://github.com/triptixx/knot/workflows/docker%20build/badge.svg)][actions]
 
 
+### Environment
+
+- `$SUID`                 - User ID to run as _default: 900_
+- `$SGID`                 - Group ID to run as _default: 900_
+
 
 SUID
 SGID
