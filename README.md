@@ -27,7 +27,6 @@ docker run -d \
     -v /rundir:/rundir \
     loxoo/knot
 ```
-
 Si vous êtes abonné au registrar Gandi, vous pouvez utiliser les variables $ENDPOINT et $APIKEY qui déclencheront une configuration cron pour automatiser les taches d'enregistrement DNSSEC :
 ```shell
 docker run -d \
@@ -38,6 +37,8 @@ docker run -d \
     -p 53:53/udp \
     -e DOMAIN=example.com \
     -e NS2=ns2.gandi.net \
+    -e ENDPOINT=https://rpc.gandi.net/xmlrpc/ \
+    -e APIKEY=XXXXXXXX... \
     -v /config:/config \
     -v /storage:/storage \
     -v /rundir:/rundir \
