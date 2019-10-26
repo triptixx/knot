@@ -28,8 +28,9 @@
 
 ## Volume
 
-- 
-- 
+- `/rundir`       - 
+- `/storage`      - 
+- `/config`       - 
 
 ## Network
 
