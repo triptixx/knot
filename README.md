@@ -17,13 +17,15 @@
 docker run -d \
     --name=srvknot \
     --restart=unless-stopped \
-    --hostname=my-plex-server \
-    -p 32400:32400 \
-    -e PLEX_CLAIM=claim-xxxx... \
-    -v /config/plex:/config \
-    -v /transcode:/transcode \
-    -v /media:/media \
-    spritsail/plex-media-server
+    --hostname=srvknot \
+    -p 53:53 \
+    -p 53:53/udp \
+    -e DOMAIN=example.com \
+    -e NS2=ns2.gandi.net \
+    -v /config:/config \
+    -v /storage:/storage \
+    -v /rundir:/rundir \
+    loxoo/knot
 ```
 
 ## Environment
