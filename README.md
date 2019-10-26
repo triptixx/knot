@@ -3,7 +3,7 @@
 [git]: https://github.com/triptixx/knot
 [actions]: https://github.com/triptixx/knot/actions
 
-# [loxoo/knot][hub] - Knot Linux base image
+# [loxoo/knot][hub]
 [![Layers](https://images.microbadger.com/badges/image/loxoo/knot.svg)][mbdg]
 [![Latest Version](https://images.microbadger.com/badges/version/loxoo/knot.svg)][hub]
 [![Git Commit](https://images.microbadger.com/badges/commit/loxoo/knot.svg)][git]
