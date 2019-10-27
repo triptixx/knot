@@ -62,7 +62,7 @@ docker run -d \
 
 - `/rundir`       - A path for storing run-time data.
 - `/storage`      - A data directory for storing zone files, journal database, and timers database.
-- `/config`       - Server configuration file location
+- `/config`       - Server configuration file location.
 
 ## Network
 
