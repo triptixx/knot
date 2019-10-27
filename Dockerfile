@@ -35,7 +35,7 @@ RUN apk add --no-cache perl-dev libressl libressl-dev zlib-dev; \
 
 ### install supercronic
 WORKDIR /supercronic-src
-RUN apk add --no-cache git go upx; \
+RUN apk add --no-cache go upx; \
     go get -d -u github.com/golang/dep; \
     cd ${GOPATH}/src/github.com/golang/dep; \
     DEP_LATEST=$(git describe --abbrev=0 --tags); \
