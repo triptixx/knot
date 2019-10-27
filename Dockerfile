@@ -1,6 +1,7 @@
-ARG KNOT_VER="2.9.0"
+ARG ALPINE_TAG=3.10
+ARG KNOT_VER=2.9.0
 
-FROM loxoo/alpine:3.10 AS builder
+FROM loxoo/alpine:${ALPINE_TAG} AS builder
 
 ARG KNOT_VER
 ARG PERL_MM_USE_DEFAULT=1
@@ -53,7 +54,7 @@ RUN chmod +x /output/usr/local/bin/*.sh
 
 #=============================================================
 
-FROM loxoo/alpine:3.10
+FROM loxoo/alpine:${ALPINE_TAG}
 
 ARG KNOT_VER
 ENV SUID=900 SGID=900
