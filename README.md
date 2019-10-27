@@ -22,9 +22,9 @@ docker run -d \
     -p 53:53/udp \
     -e DOMAIN=example.com \
     -e NS2=ns2.gandi.net \
-    -v /config:/config \
-    -v /storage:/storage \
-    -v /rundir:/rundir \
+    -v $PWD/config:/config \
+    -v $PWD/storage:/storage \
+    -v $PWD/rundir:/rundir \
     loxoo/knot
 ```
 If you subscribe to the Gandi registrar, you can use the $ENDPOINT and $APIKEY variables that will trigger a cron configuration to automate DNSSEC registration tasks :
@@ -39,9 +39,9 @@ docker run -d \
     -e NS2=ns2.gandi.net \
     -e ENDPOINT=https://rpc.gandi.net/xmlrpc/ \
     -e APIKEY=XXXXXXXX... \
-    -v /config:/config \
-    -v /storage:/storage \
-    -v /rundir:/rundir \
+    -v $PWD/config:/config \
+    -v $PWD/storage:/storage \
+    -v $PWD/rundir:/rundir \
     loxoo/knot
 ```
 
