@@ -47,8 +47,8 @@ docker run -d \
 
 ## Environment
 
-- `$SUID`         - User ID to run as. _default: `900`_
-- `$SGID`         - Group ID to run as. _default: `900`_
+- `$SUID`         - User ID to run as. _default: `901`_
+- `$SGID`         - Group ID to run as. _default: `901`_
 - `$DOMAIN`       - Domain master zone. _required_
 - `$NS2`          - Fqdn name of slave server zone. _required_
 - `$MX`           - Name of mail server. _optional_
