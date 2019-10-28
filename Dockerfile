@@ -57,7 +57,7 @@ RUN chmod +x /output/usr/local/bin/*.sh
 FROM loxoo/alpine:${ALPINE_TAG}
 
 ARG KNOT_VER
-ENV SUID=900 SGID=900
+ENV SUID=901 SGID=901
 
 LABEL org.label-schema.name="knot" \
       org.label-schema.description="A Docker image for Knot authoritative-only DNS server" \
