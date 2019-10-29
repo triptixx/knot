@@ -144,6 +144,6 @@ val=substr($0,RSTART,RLENGTH); $NF="'${LOG_LEVEL:-info}'"; print val $0; next } 
 fi
 
 if [ \( -n "$ENDPOINT" \) -a \( -n "$APIKEY" \) ]; then
-    echo -e '*/10 * * * * perl /supercronic/gandi-publish-ds\n\
+    echo -e '*/10 * * * * perl /supercronic/gandi-publish-ds\n
 */15 * * * * perl /supercronic/gandi-remove-dead-keys' > /supercronic/knot-cron
 fi
