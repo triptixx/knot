@@ -5,7 +5,7 @@ set -eo pipefail
 RED='\033[0;31m'
 RESET='\033[0m'
 
-CONFIG_DIR='/rundir;/storage;/config'
+CONFIG_DIR='/rundir;/storage;/config;/supercronic'
 
 for DIR in `echo $CONFIG_DIR | tr ';' '\n'`; do
     if su-exec $SUID:$SGID [ ! -w "$DIR" ]; then
