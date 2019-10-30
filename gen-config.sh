@@ -63,7 +63,7 @@ template:
 
 zone:
   - domain: ${DOMAIN}
-    file: ${DOMAIN}.zone
+    file: /config/${DOMAIN}.zone
     notify: slave
     acl: acl_slave
     semantic-checks: on
