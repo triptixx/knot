@@ -1,5 +1,5 @@
 #!/usr/bin/with-contenv sh
 
 if [ \( -n "$ENDPOINT" \) -a \( -n "$APIKEY" \) -a \( -e /supercronic/knot-cron \) ]; then
-    exec s6-applyuidgid -u 901 -g 901 -G 901 /supercronic/supercronic /supercronic/knot-cron
+    exec s6-applyuidgid -u $SUID -g $SGID -G $SGID /supercronic/supercronic /supercronic/knot-cron
 fi
