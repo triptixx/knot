@@ -8,7 +8,7 @@ RESET='\033[0m'
 CONFIG_DIR='/rundir;/storage;/config;/supercronic'
 
 for DIR in `echo $CONFIG_DIR | tr ';' '\n'`; do
-    if su-exec $SUID:$SGID [ ! -w "$DIR" ]; then
+    if s6-applyuidgid -u $SUID -g $SGID -G $SGID [ ! -w "$DIR" ]; then
         2>&1 echo -e "${RED}####################### WARNING #######################${RESET}"
         2>&1 echo
         2>&1 echo -e "${RED}     No permission to write in '$DIR' directory.${RESET}"
