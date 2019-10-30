@@ -13,13 +13,13 @@ jobs:
       - name: build
         uses: triptixx/action-docker-build@master
         with:
-          repo: knot-dev
+          repo: knot-s6-dev
           make: true
       - name: test
         uses: triptixx/action-docker-test@master
         with:
           verbose: true
-          repo: knot-dev
+          repo: knot-s6-dev
           run_args: -e DOMAIN=example.com -e NS2=ns2.gandi.net
           exec_pre: /knot/bin/kdig @127.0.0.1 -p 53 +short +time=1 +retry=0 localhost A
       - name: publish
@@ -28,5 +28,5 @@ jobs:
           docker_username: ${{ secrets.docker_username }}
           docker_password: ${{ secrets.docker_password }}
           from: knot-dev
-          repo: ${{ secrets.docker_username }}/knot
+          repo: ${{ secrets.docker_username }}/knot-s6
           tags: latest,%label org.label-schema.version | %auto
