@@ -28,20 +28,16 @@ server:
     nsid:
     user: knot:knot
     listen: 0.0.0.0@53
-
 remote:
   - id: slave
     address: ${IPNS2}@53
-
 acl:
   - id: acl_slave
     address: ${IPNS2}
     action: transfer
-
 submission:
   - id: sub_ksk
     parent: slave
-
 policy:
   - id: rsa
     algorithm: RSASHA256
@@ -51,16 +47,13 @@ policy:
     ksk-lifetime: 365d
     nsec3: on
     ksk-submission: sub_ksk
-
 mod-rrl:
   - id: default
     rate-limit: 200
     slip: 2
-
 template:
   - id: default
     global-module: mod-rrl/default
-
 zone:
   - domain: ${DOMAIN}
     file: ${DOMAIN}.zone
@@ -71,7 +64,6 @@ zone:
     dnssec-signing: on
     dnssec-policy: rsa
     zonefile-load: difference
-
 log:
   - target: stdout
     any: ${LOG_LEVEL:-info}
