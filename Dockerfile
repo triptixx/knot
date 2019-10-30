@@ -32,7 +32,7 @@ WORKDIR /output
 RUN apk add --no-cache perl-dev libressl libressl-dev zlib-dev; \
     perl -MCPAN -e "install XML::RPC"; \
     perl -MCPAN -e "install Net::DNS"; \
-    cp -a --parents /usr/local/share/*/site_perl .
+    cp -a --parents /usr/local/*/*/site_perl .
 
 ### install supercronic
 WORKDIR /supercronic-src
