@@ -1,0 +1,4 @@
+/rundir false $SUID:$GUID - -
+/storage false $SUID:$GUID - -
+/config false $SUID:$GUID - -
+/supercronic false $SUID:$GUID - -
