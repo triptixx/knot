@@ -2,7 +2,7 @@ name: docker build
 on:
   push:
     branches:
-      - master
+      - knot-s6
 
 jobs:
   knot:
