@@ -49,12 +49,14 @@ RUN apk add --no-cache go upx; \
     upx /output/supercronic/supercronic
 
 COPY *.pl /output/supercronic/
-COPY *.sh /output/usr/local/bin/
-RUN chmod +x /output/usr/local/bin/*.sh
+COPY 01-permission /output/etc/fix-attrs.d/
+COPY 01-gen-config /output/etc/cont-init.d/
+COPY knot-run /output/etc/services.d/01-knot/run
+COPY supercronic-run /output/etc/services.d/02-supercronic/run
 
 #=============================================================
 
-FROM loxoo/alpine:${ALPINE_TAG}
+FROM loxoo/alpine-s6:${ALPINE_TAG}
 
 ARG KNOT_VER
 ENV SUID=901 SGID=901
@@ -75,6 +77,3 @@ EXPOSE 53/TCP 53/UDP
 
 HEALTHCHECK --start-period=10s --timeout=5s \
     CMD /knot/bin/kdig @127.0.0.1 -p 53 +short +time=1 +retry=0 localhost A
-
-ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/entrypoint.sh"]
-CMD ["/knot/sbin/knotd", "-c", "/config/knot.conf"]
