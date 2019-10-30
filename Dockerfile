@@ -49,8 +49,8 @@ RUN apk add --no-cache go upx; \
     upx /output/supercronic/supercronic
 
 COPY *.pl /output/supercronic/
-COPY gen-config.sh /output/usr/local/bin/
 COPY entrypoint.sh /output/etc/cont-init.d/01-entrypoint
+COPY gen-config.sh /output/usr/local/bin/
 COPY knot-run.sh /output/etc/services.d/01-knot/run
 COPY supercronic-run.sh /output/etc/services.d/02-supercronic/run
 
