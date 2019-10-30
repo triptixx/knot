@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/with-contenv /bin/sh
 set -eo pipefail
 
 # ANSI colour escape sequences
@@ -21,9 +21,6 @@ for DIR in `echo $CONFIG_DIR | tr ';' '\n'`; do
     fi
 done
 
-su-exec $SUID:$SGID sh <<EOF
-source /usr/local/bin/gen-config.sh
-if [ \( -n "$ENDPOINT" \) -a \( -n "$APIKEY" \) -a \( -e /supercronic/knot-cron \) ]; then
-    /supercronic/supercronic /supercronic/knot-cron &
-fi
+s6-applyuidgid -u $SUID -g $SGID -G $SGID sh <<EOF
+    source /usr/local/bin/gen-config.sh
 EOF
