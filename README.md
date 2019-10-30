@@ -1,15 +1,15 @@
-[hub]: https://hub.docker.com/r/loxoo/knot
-[mbdg]: https://microbadger.com/images/loxoo/knot
-[git]: https://github.com/triptixx/knot
+[hub]: https://hub.docker.com/r/loxoo/knot-6
+[mbdg]: https://microbadger.com/images/loxoo/knot-6
+[git]: https://github.com/triptixx/knot/tree/knot-s6
 [actions]: https://github.com/triptixx/knot/actions
 
-# [loxoo/knot][hub]
-[![Layers](https://images.microbadger.com/badges/image/loxoo/knot.svg)][mbdg]
-[![Latest Version](https://images.microbadger.com/badges/version/loxoo/knot.svg)][hub]
-[![Git Commit](https://images.microbadger.com/badges/commit/loxoo/knot.svg)][git]
-[![Docker Stars](https://img.shields.io/docker/stars/loxoo/knot.svg)][hub]
-[![Docker Pulls](https://img.shields.io/docker/pulls/loxoo/knot.svg)][hub]
-[![Build Status](https://github.com/triptixx/knot/workflows/docker%20build/badge.svg)][actions]
+# [loxoo/knot-s6][hub]
+[![Layers](https://images.microbadger.com/badges/image/loxoo/knot-6.svg)][mbdg]
+[![Latest Version](https://images.microbadger.com/badges/version/loxoo/knot-6.svg)][hub]
+[![Git Commit](https://images.microbadger.com/badges/commit/loxoo/knot-6.svg)][git]
+[![Docker Stars](https://img.shields.io/docker/stars/loxoo/knot-6.svg)][hub]
+[![Docker Pulls](https://img.shields.io/docker/pulls/loxoo/knot-6.svg)][hub]
+[![Build Status](https://github.com/triptixx/knot/workflows/docker%20build/badge.svg?branch=knot-s6)][actions]
 
 ## Usage
 
@@ -25,7 +25,7 @@ docker run -d \
     -v $PWD/config:/config \
     -v $PWD/storage:/storage \
     -v $PWD/rundir:/rundir \
-    loxoo/knot
+    loxoo/knot-s6
 ```
 If you subscribe to the Gandi registrar, you can use the $ENDPOINT and $APIKEY variables that will trigger a cron configuration to automate DNSSEC registration tasks :
 ```shell
@@ -42,7 +42,7 @@ docker run -d \
     -v $PWD/config:/config \
     -v $PWD/storage:/storage \
     -v $PWD/rundir:/rundir \
-    loxoo/knot
+    loxoo/knot-s6
 ```
 
 ## Environment
