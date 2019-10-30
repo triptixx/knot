@@ -5,7 +5,7 @@ on:
       - knot-s6
 
 jobs:
-  knot:
+  knot-s6:
     runs-on: ubuntu-latest
     steps:
       - name: clone
@@ -27,6 +27,6 @@ jobs:
         with:
           docker_username: ${{ secrets.docker_username }}
           docker_password: ${{ secrets.docker_password }}
-          from: knot-dev
+          from: knot-s6-dev
           repo: ${{ secrets.docker_username }}/knot-s6
           tags: latest,%label org.label-schema.version | %auto
