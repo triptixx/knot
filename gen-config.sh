@@ -139,8 +139,8 @@ EOA
 
     fi
 elif [ -e /config/knot.conf ]; then
-    awk '/:$/ { flag="" } /log:/ { flag=1 } flag && NF && /any:/ { match($0,/^[[:space:]]+/); \
-val=substr($0,RSTART,RLENGTH); $NF="'${LOG_LEVEL:-info}'"; print val $0; next } 1' /config/knot.conf
+    echo "$(awk '/:$/ { flag="" } /log:/ { flag=1 } flag && NF && /any:/ { match($0,/^[[:space:]]+/); \
+val=substr($0,RSTART,RLENGTH); $NF="'${LOG_LEVEL:-info}'"; print val $0; next } 1' /config/knot.conf)" > /config/knot.conf
 fi
 
 if [ \( -n "$ENDPOINT" \) -a \( -n "$APIKEY" \) ]; then
