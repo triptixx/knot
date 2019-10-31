@@ -19,7 +19,8 @@ for(@domain) {
     my $domain = $_;
     $domain =~ s/\.$//;
 
-    chomp(my @output = `/knot/sbin/keymgr $domain list | awk '\$2 == "ksk=yes" {gsub("tag=","",\$4);print \$4}' | sed 's/^[0]*//'`);
+    chomp(my @output = `/knot/sbin/keymgr $domain list | awk '\$2 == "ksk=yes" {gsub("tag=","",\$4);print \$4}' \\
+        | sed 's/^[0]*//'`);
 
     my $found_domain = 0;
     for(@$domains) {
