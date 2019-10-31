@@ -32,7 +32,7 @@ WORKDIR /output
 RUN apk add --no-cache perl-dev libressl libressl-dev zlib-dev; \
     perl -MCPAN -e "install XML::RPC"; \
     perl -MCPAN -e "install Net::DNS"; \
-    cp -a --parents /usr/local/share/*/site_perl .
+    cp -a --parents /usr/local/*/*/site_perl .
 
 ### install supercronic
 WORKDIR /supercronic-src
@@ -66,7 +66,7 @@ LABEL org.label-schema.name="knot" \
 
 COPY --from=builder /output/ /
 
-RUN apk add --no-cache gnutls userspace-rcu protobuf-c fstrm libedit libidn perl; \
+RUN apk add --no-cache gnutls userspace-rcu protobuf-c fstrm libedit libidn perl libressl; \
     adduser -D -u $SUID -s /sbin/nologin knot
 
 VOLUME ["/rundir", "/storage", "/config"]
