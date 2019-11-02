@@ -53,10 +53,6 @@ mod-rrl:
     slip: 2
 template:
   - id: default
-    global-module: mod-rrl/default
-zone:
-  - domain: ${DOMAIN}
-    file: /config/${DOMAIN}.zone
     notify: slave
     acl: acl_slave
     semantic-checks: on
@@ -64,6 +60,11 @@ zone:
     dnssec-signing: on
     dnssec-policy: rsa
     zonefile-load: difference
+    serial-policy: dateserial
+    global-module: mod-rrl/default
+zone:
+  - domain: ${DOMAIN}
+    file: /config/%s.zone
 log:
   - target: stdout
     any: ${LOG_LEVEL:-info}
@@ -75,7 +76,14 @@ EOL
 
         >&2 echo 'Auto generate dns zone file'
 
-        SERIAL="$(date +"%Y%m%d%S")"
+        SERIAL="$(/knot/bin/kdig +short $DOMAIN SOA @$NS2 | awk '{print $3}')"
+        DATE="$(date +"%Y%m%d")"
+        if [ \( -z "$CUR_SERIAL" \) -o \( "${SERIAL:0:8}" -lt "$DATE" \) ]; then
+            SERIAL="${DATE}00"
+        else
+            SERIAL=$((SERIAL+1))
+        fi
+
         NS1="ns1.${DOMAIN}"
         IPNS1="$(wget -qO- icanhazip.com)"
         NSMAIL="${MX%%.*}.${DOMAIN}"
@@ -133,6 +141,23 @@ EOA
 elif [ -e /config/knot.conf ]; then
     echo "$(awk '/:$/ { flag="" } /log:/ { flag=1 } flag && NF && /any:/ { match($0,/^[[:space:]]+/); \
 val=substr($0,RSTART,RLENGTH); $NF="'${LOG_LEVEL:-info}'"; print val $0; next } 1' /config/knot.conf)" > /config/knot.conf
+
+    for DOM in $(awk '/zone/{flag=1} flag && /domain:/{print $NF;flag=""}' /config/knot.conf); do
+        ZONE="$(find /config -name 'knot.conf' -o -type f -print | xargs grep -il "SOA.*$DOM")"
+        if [ -n "$ZONE" ]; then
+            SERIAL="$(sed -n 's/.*[^[:digit:]]\([[:digit:]]\{10\}\)[^[:digit:]].*/\1/p' $ZONE)"
+            DATE="$(date +"%Y%m%d")"
+            if [ "${SERIAL:0:8}" -lt "$DATE" ]; then
+                SERIAL="${DATE}00"
+            elif [ "${SERIAL:0:8}" -eq "$DATE" ]; then
+                SERIAL=$((SERIAL+1))
+            fi
+            sed -i -r 's/(.*[^[:digit:]])([[:digit:]]{10})([^[:digit:]].*)/\1'"$SERIAL"'\3/' $ZONE
+            echo "serial number of the domain $DOM incremented"
+        else
+            echo "domain $DOM zone file not found"
+        fi
+    done
 fi
 
 if [ \( -n "$ENDPOINT" \) -a \( -n "$APIKEY" \) ]; then
