@@ -6,13 +6,16 @@ RED='\033[0;31m'
 RESET='\033[0m'
 error() { >&2 echo -e "${RED}Error: $@${RESET}"; exit 1; }
 
-if [ ! \( -e /config/*.zone \) -o ! \( -e /config/knot.conf \) ]; then
+CONF_KNOT='/config/knot.conf'
+CONF_CRON='/supercronic/knot-cron'
+
+if [ ! \( -e /config/*.zone \) -o ! \( -e "$CONF_KNOT" \) ]; then
 
     if [ \( -z "$DOMAIN" \) -o \( -z "$NS2" \) ]; then
         error "Missing 'DOMAIN' or 'NS2' arguments required for auto configuration"
     fi
 
-    if [ ! -e /config/knot.conf ]; then
+    if [ ! -e "$CONF_KNOT" ]; then
 
         >&2 echo 'Auto generate knot config file'
 
@@ -21,7 +24,7 @@ if [ ! \( -e /config/*.zone \) -o ! \( -e /config/knot.conf \) ]; then
             error "Missing 'IPNS2', Impossible to resolve ip of ${NS2}"
         fi
 
-        cat > /config/knot.conf <<EOL
+        cat > "$CONF_KNOT" <<EOL
 server:
     identity:
     version:
@@ -138,11 +141,11 @@ EOA
         echo -e "$TXTZONE" > "/config/${DOMAIN}.zone"
 
     fi
-elif [ -e /config/knot.conf ]; then
-    echo "$(awk '/:$/ { flag="" } /log:/ { flag=1 } flag && NF && /any:/ { match($0,/^[[:space:]]+/); \
-val=substr($0,RSTART,RLENGTH); $NF="'${LOG_LEVEL:-info}'"; print val $0; next } 1' /config/knot.conf)" > /config/knot.conf
+elif [ -e "$CONF_KNOT" ]; then
+    echo "$(awk '/:$/ { flag="" } /^log:/ { flag=1 } flag && NF && /any:/ { match($0,/^[[:space:]]+/); \
+val=substr($0,RSTART,RLENGTH); $NF="'${LOG_LEVEL:-info}'"; print val $0; next } 1' $CONF_KNOT)" > "$CONF_KNOT"
 
-    for DOM in $(awk '/zone/{flag=1} flag && /domain:/{print $NF;flag=""}' /config/knot.conf); do
+    for DOM in $(awk '/^zone:/ {flag=1} flag && /domain:/ {print $NF;flag=""}' "$CONF_KNOT"); do
         ZONE="$(find /config -name 'knot.conf' -o -type f -print | xargs grep -il "SOA.*$DOM")"
         if [ -n "$ZONE" ]; then
             SERIAL="$(sed -n 's/.*[^[:digit:]]\([[:digit:]]\{10\}\)[^[:digit:]].*/\1/p' $ZONE)"
@@ -162,5 +165,5 @@ fi
 
 if [ \( -n "$ENDPOINT" \) -a \( -n "$APIKEY" \) ]; then
     echo -e '*/10 * * * * perl /supercronic/gandi-publish-ds.pl\n
-*/15 * * * * perl /supercronic/gandi-remove-dead-keys.pl' > /supercronic/knot-cron
+*/15 * * * * perl /supercronic/gandi-remove-dead-keys.pl' > "$CONF_CRON"
 fi
