@@ -1,5 +1,5 @@
 ARG ALPINE_TAG=3.10
-ARG KNOT_VER=2.9.0
+ARG KNOT_VER=2.9.1
 
 FROM loxoo/alpine:${ALPINE_TAG} AS builder
 
