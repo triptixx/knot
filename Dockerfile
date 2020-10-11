@@ -9,9 +9,8 @@ ARG GOPATH=/supercronic-src
 
 ### install knot
 WORKDIR /knot-src
-RUN apk add --no-cache build-base git autoconf automake \
-        libtool gnutls-dev userspace-rcu-dev protobuf-c-dev \
-        fstrm-dev libedit-dev libidn-dev lmdb-dev; \
+RUN apk add --no-cache build-base git autoconf automake libtool gnutls-dev userspace-rcu-dev \
+                       protobuf-c-dev fstrm-dev lmdb-dev libedit-dev libidn2-dev nghttp2-dev linux-headers; \
     git clone https://gitlab.labs.nic.cz/knot/knot-dns --branch v${KNOT_VER} --depth 1 .; \
     autoreconf -sif; \
     ./configure --prefix=/knot \
@@ -44,6 +43,7 @@ RUN apk add --no-cache go upx; \
     go build -o ${GOPATH}/dep -ldflags="-X main.version=$DEP_LATEST" ./cmd/dep; \
     go get -d -u github.com/aptible/supercronic; \
     cd ${GOPATH}/src/github.com/aptible/supercronic; \
+    ${GOPATH}/dep init; \
     ${GOPATH}/dep ensure -vendor-only; \
     go build -ldflags "-s -w" -o /output/supercronic/supercronic; \
     upx /output/supercronic/supercronic
@@ -66,7 +66,7 @@ LABEL org.label-schema.name="knot" \
 
 COPY --from=builder /output/ /
 
-RUN apk add --no-cache gnutls userspace-rcu protobuf-c fstrm libedit libidn lmdb perl libressl; \
+RUN apk add --no-cache gnutls userspace-rcu protobuf-c fstrm lmdb perl libressl; \
     adduser -D -u $SUID -s /sbin/nologin knot
 
 VOLUME ["/rundir", "/storage", "/config"]
