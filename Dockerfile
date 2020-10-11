@@ -11,7 +11,7 @@ ARG GOPATH=/supercronic-src
 WORKDIR /knot-src
 RUN apk add --no-cache build-base git autoconf automake \
         libtool gnutls-dev userspace-rcu-dev protobuf-c-dev \
-        fstrm-dev libedit-dev libidn-dev; \
+        fstrm-dev libedit-dev libidn-dev lmdb-dev; \
     git clone https://gitlab.labs.nic.cz/knot/knot-dns --branch v${KNOT_VER} --depth 1 .; \
     autoreconf -sif; \
     ./configure --prefix=/knot \
@@ -66,7 +66,7 @@ LABEL org.label-schema.name="knot" \
 
 COPY --from=builder /output/ /
 
-RUN apk add --no-cache gnutls userspace-rcu protobuf-c fstrm libedit libidn perl libressl; \
+RUN apk add --no-cache gnutls userspace-rcu protobuf-c fstrm libedit libidn lmdb perl libressl; \
     adduser -D -u $SUID -s /sbin/nologin knot
 
 VOLUME ["/rundir", "/storage", "/config"]
