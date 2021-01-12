@@ -59,7 +59,6 @@ template:
     notify: slave
     acl: acl_slave
     semantic-checks: on
-    disable-any: on
     dnssec-signing: on
     dnssec-policy: rsa
     zonefile-load: difference
