@@ -54,7 +54,7 @@ COPY gen-config.sh /output/usr/local/bin/
 COPY knot-run.sh /output/etc/services.d/01-knot/run
 COPY supercronic-run.sh /output/etc/services.d/02-supercronic/run
 
-#=============================================================
+#==============================================================
 
 FROM loxoo/alpine-s6:${ALPINE_TAG}
 
