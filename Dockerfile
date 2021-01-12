@@ -28,7 +28,7 @@ RUN apk add --no-cache build-base git autoconf automake libtool gnutls-dev users
 
 ### install modules perl
 WORKDIR /output
-RUN apk add --no-cache perl-dev libressl libressl-dev zlib-dev; \
+RUN apk add --no-cache perl-dev openssl openssl-dev zlib-dev; \
     perl -MCPAN -e "install XML::RPC"; \
     perl -MCPAN -e "install Net::DNS"; \
     cp -a --parents /usr/local/*/*/site_perl .
