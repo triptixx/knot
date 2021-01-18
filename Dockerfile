@@ -64,7 +64,7 @@ LABEL org.label-schema.name="knot" \
 
 COPY --from=builder /output/ /
 
-RUN apk add --no-cache gnutls userspace-rcu protobuf-c fstrm lmdb libedit libidn2 nghttp2 python3; \
+RUN apk add --no-cache gnutls userspace-rcu protobuf-c fstrm lmdb libedit libidn2 nghttp2 python3 py3-requests; \
     adduser -D -u $SUID -s /sbin/nologin knot
 
 VOLUME ["/rundir", "/storage", "/config"]
