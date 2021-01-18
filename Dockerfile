@@ -4,7 +4,6 @@ ARG KNOT_VER=3.0.3
 FROM loxoo/alpine:${ALPINE_TAG} AS builder
 
 ARG KNOT_VER
-ARG PERL_MM_USE_DEFAULT=1
 ARG GOPATH=/supercronic-src
 
 ### install knot
@@ -26,12 +25,11 @@ RUN apk add --no-cache build-base git autoconf automake libtool gnutls-dev users
     rm -rf /output/rundir/* /output/storage/* /output/config/*; \
     find /output -exec sh -c 'file "{}" | grep -q ELF && strip --strip-debug "{}"' \;
 
-### install modules perl
+### install modules python
 WORKDIR /output
-RUN apk add --no-cache perl-dev openssl openssl-dev zlib-dev; \
-    perl -MCPAN -e "install XML::RPC"; \
-    perl -MCPAN -e "install Net::DNS"; \
-    cp -a --parents /usr/local/*/*/site_perl .
+RUN apk add py3-pip; \
+    pip install xmltodict; \
+    cp -a --parents /usr/lib/python*/site-packages/xmltodict* .
 
 ### install supercronic
 WORKDIR /supercronic-src
@@ -48,7 +46,7 @@ RUN apk add --no-cache go upx; \
     go build -ldflags "-s -w" -o /output/supercronic/supercronic; \
     upx /output/supercronic/supercronic
 
-COPY *.pl /output/supercronic/
+COPY *.py /output/supercronic/
 COPY entrypoint.sh /output/etc/cont-init.d/01-entrypoint
 COPY gen-config.sh /output/usr/local/bin/
 COPY knot-run.sh /output/etc/services.d/01-knot/run
@@ -68,7 +66,7 @@ LABEL org.label-schema.name="knot" \
 
 COPY --from=builder /output/ /
 
-RUN apk add --no-cache gnutls userspace-rcu protobuf-c fstrm lmdb libedit libidn2 nghttp2 perl libressl; \
+RUN apk add --no-cache gnutls userspace-rcu protobuf-c fstrm lmdb libedit libidn2 nghttp2 python3; \
     adduser -D -u $SUID -s /sbin/nologin knot
 
 VOLUME ["/rundir", "/storage", "/config"]
