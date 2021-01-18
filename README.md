@@ -21,13 +21,13 @@ docker run -d \
     -p 53:53 \
     -p 53:53/udp \
     -e DOMAIN=example.com \
-    -e NS2=ns2.gandi.net \
+    -e NS2=ns2.example.net \
     -v $PWD/config:/config \
     -v $PWD/storage:/storage \
     -v $PWD/rundir:/rundir \
     loxoo/knot
 ```
-If you subscribe to the Gandi registrar, you can use the $ENDPOINT and $APIKEY variables that will trigger a cron configuration to automate DNSSEC registration tasks :
+If you subscribe to the NameSilo registrar, you can use the $ENDPOINT and $APIKEY variables that will trigger a cron configuration to automate DNSSEC registration tasks :
 ```shell
 docker run -d \
     --name=srvknot \
@@ -36,8 +36,8 @@ docker run -d \
     -p 53:53 \
     -p 53:53/udp \
     -e DOMAIN=example.com \
-    -e NS2=ns2.gandi.net \
-    -e ENDPOINT=https://rpc.gandi.net/xmlrpc/ \
+    -e NS2=ns2.example.net \
+    -e ENDPOINT=https://www.namesilo.com/api/ \
     -e APIKEY=XXXXXXXX... \
     -v $PWD/config:/config \
     -v $PWD/storage:/storage \
@@ -53,8 +53,8 @@ docker run -d \
 - `$NS2`          - Fqdn name of slave server zone. _required_
 - `$MX`           - Name of mail server. _optional_
 - `$CNAME`        - Name of different subdomain. Separated by commas. _optional_
-- `$ENDPOINT`     - Name server of Gandi API. _optional_
-- `$APIKEY`       - Authentication Gandi API Key. _optional_
+- `$ENDPOINT`     - Name server of NameSilo API. _optional_
+- `$APIKEY`       - Authentication NameSilo API Key. _optional_
 - `$LOG_LEVEL`    - Logging severity levels. _default: `info`_
 - `$TZ`           - Timezone. _optional_
 
