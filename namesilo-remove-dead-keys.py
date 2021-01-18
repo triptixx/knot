@@ -5,10 +5,8 @@ import requests
 import subprocess
 import xmltodict
 
-#endpoint = os.environ['ENDPOINT'] if 'ENDPOINT' in os.environ else sys.exit('no endpoint in environnement system')
-#apikey   = os.environ['APIKEY'] if 'APIKEY' in os.environ else sys.exit('no apikey in environnement system')
-endpoint = 'https://www.namesilo.com/api/'
-apikey = '12d596f5bab63f7ff3517'
+endpoint = os.environ['ENDPOINT'] if 'ENDPOINT' in os.environ else sys.exit('no endpoint in environnement system')
+apikey   = os.environ['APIKEY'] if 'APIKEY' in os.environ else sys.exit('no apikey in environnement system')
 apiversion = 1
 apitype    = 'xml'
 apidict    = {'version': apiversion, 'type': apitype, 'key': apikey}
