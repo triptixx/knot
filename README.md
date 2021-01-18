@@ -21,7 +21,7 @@ docker run -d \
     -p 53:53 \
     -p 53:53/udp \
     -e DOMAIN=example.com \
-    -e NS2=ns2.gandi.net \
+    -e NS2=ns2.exemple.net \
     -v $PWD/config:/config \
     -v $PWD/storage:/storage \
     -v $PWD/rundir:/rundir \
@@ -36,7 +36,7 @@ docker run -d \
     -p 53:53 \
     -p 53:53/udp \
     -e DOMAIN=example.com \
-    -e NS2=ns2.nameserver.net \
+    -e NS2=ns2.exemple.net \
     -e ENDPOINT=https://www.namesilo.com/api/ \
     -e APIKEY=XXXXXXXX... \
     -v $PWD/config:/config \
