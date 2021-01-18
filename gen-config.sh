@@ -163,6 +163,6 @@ val=substr($0,RSTART,RLENGTH); $NF="'${LOG_LEVEL:-info}'"; print val $0; next } 
 fi
 
 if [ \( -n "$ENDPOINT" \) -a \( -n "$APIKEY" \) ]; then
-    echo -e '*/10 * * * * perl /supercronic/gandi-publish-ds.pl\n
-*/15 * * * * perl /supercronic/gandi-remove-dead-keys.pl' > "$CONF_CRON"
+    echo -e '*/10 * * * * python3 /supercronic/namesilo-publish-ds.py\n
+*/15 * * * * python3 /supercronic/namesilo-remove-dead-keys.py' > "$CONF_CRON"
 fi
