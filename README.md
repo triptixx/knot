@@ -27,7 +27,7 @@ docker run -d \
     -v $PWD/rundir:/rundir \
     loxoo/knot-s6
 ```
-If you subscribe to the Gandi registrar, you can use the $ENDPOINT and $APIKEY variables that will trigger a cron configuration to automate DNSSEC registration tasks :
+If you subscribe to the NameSilo registrar, you can use the $ENDPOINT and $APIKEY variables that will trigger a cron configuration to automate DNSSEC registration tasks :
 ```shell
 docker run -d \
     --name=srvknot \
@@ -36,8 +36,8 @@ docker run -d \
     -p 53:53 \
     -p 53:53/udp \
     -e DOMAIN=example.com \
-    -e NS2=ns2.gandi.net \
-    -e ENDPOINT=https://rpc.gandi.net/xmlrpc/ \
+    -e NS2=ns2.nameserver.net \
+    -e ENDPOINT=https://www.namesilo.com/api/ \
     -e APIKEY=XXXXXXXX... \
     -v $PWD/config:/config \
     -v $PWD/storage:/storage \
