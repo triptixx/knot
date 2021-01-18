@@ -20,7 +20,7 @@ jobs:
         with:
           verbose: true
           repo: knot-dev
-          run_args: -e DOMAIN=example.com -e NS2=ns2.gandi.net
+          run_args: -e DOMAIN=example.com -e NS2=ns2.afraid.org
           exec_pre: /knot/bin/kdig @127.0.0.1 -p 53 +short +time=1 +retry=0 localhost A
       - name: publish
         uses: triptixx/action-docker-publish@master
