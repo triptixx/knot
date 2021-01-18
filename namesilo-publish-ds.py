@@ -67,7 +67,7 @@ for domainlocal in lstdomainlocal.split('\n'):
                 print(f'    Algorithm: {dskeylocal[3]}')
 
                 lstdskey = urlget('dnsSecListRecords', {'domain': domainlocal})
-                lstdskey = xmltodict.parse(lstdskey.text, force_list={'ds_record': True})
+                lstdskey = xmltodict.parse(lstdskey.text, force_list={'ds_record'})
 
                 found_key = 0
                 try:
