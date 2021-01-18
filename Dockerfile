@@ -50,7 +50,7 @@ COPY *.py /output/supercronic/
 COPY *.sh /output/usr/local/bin/
 RUN chmod +x /output/usr/local/bin/*.sh
 
-#=============================================================
+#==============================================================
 
 FROM loxoo/alpine:${ALPINE_TAG}
 
