@@ -80,9 +80,9 @@ EOL
 
         SERIAL="$(/knot/bin/kdig +short $DOMAIN SOA @$NS2 | awk '{print $3}')"
         DATE="$(date +"%Y%m%d")"
-        if [ \( -z "$SERIAL" \) ]; then
+        if [ -z "$SERIAL" ]; then
             SERIAL="${DATE}00"
-        elif [ \( "${SERIAL:0:8}" -lt "$DATE" \) ]; then
+        elif [ "${SERIAL:0:8}" -lt "$DATE" ]; then
             SERIAL="${DATE}00"
         else
             SERIAL=$((SERIAL+1))
