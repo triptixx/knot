@@ -82,7 +82,7 @@ EOL
         DATE="$(date +"%Y%m%d")"
         if [ \( -z "$SERIAL" \) ]; then
             SERIAL="${DATE}00"
-        elif [ \( "${SERIAL:0:8}" -lt "$DATE" \) ]
+        elif [ \( "${SERIAL:0:8}" -lt "$DATE" \) ]; then
             SERIAL="${DATE}00"
         else
             SERIAL=$((SERIAL+1))
