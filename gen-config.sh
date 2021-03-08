@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -xv
 set -eo pipefail
 
 # ANSI colour escape sequences
