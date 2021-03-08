@@ -1,6 +1,5 @@
 #!/bin/sh
-#set -eo pipefail
-set -xv
+set -eo pipefail
 
 # ANSI colour escape sequences
 RED='\033[0;31m'
@@ -81,14 +80,16 @@ EOL
 
         SERIAL="$(/knot/bin/kdig +short $DOMAIN SOA @$NS2 | awk '{print $3}')"
         DATE="$(date +"%Y%m%d")"
-        if [ \( -z "$SERIAL" \) -o \( "${SERIAL:0:8}" -lt "$DATE" \) ]; then
+        if [ \( -z "$SERIAL" \) ]; then
+            SERIAL="${DATE}00"
+        elif [ \( "${SERIAL:0:8}" -lt "$DATE" \) ]
             SERIAL="${DATE}00"
         else
             SERIAL=$((SERIAL+1))
         fi
 
         NS1="ns1.${DOMAIN}"
-        IPNS1="$(wget -qO- icanhazip.com)"
+        IPNS1="$(wget -qO- checkip.amazonaws.com)"
         NSMAIL="${MX%%.*}.${DOMAIN}"
 
         ###### start SOA ######
