@@ -41,8 +41,6 @@ RUN apk add --no-cache go upx; \
     go build -o ${GOPATH}/dep -ldflags="-X main.version=$DEP_LATEST" ./cmd/dep; \
     go get -d -u github.com/aptible/supercronic; \
     cd ${GOPATH}/src/github.com/aptible/supercronic; \
-    ${GOPATH}/dep init; \
-    ${GOPATH}/dep ensure -vendor-only; \
     go mod vendor; \
     go build -ldflags "-s -w" -o /output/supercronic/supercronic; \
     upx /output/supercronic/supercronic
