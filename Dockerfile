@@ -5,6 +5,7 @@ FROM loxoo/alpine:${ALPINE_TAG} AS builder
 
 ARG KNOT_VER
 ARG GOPATH=/supercronic-src
+ARG GO111MODULE=off
 
 ### install knot
 WORKDIR /knot-src
