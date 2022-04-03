@@ -51,6 +51,7 @@ COPY entrypoint.sh /output/etc/cont-init.d/01-entrypoint
 COPY gen-config.sh /output/usr/local/bin/
 COPY knot-run.sh /output/etc/services.d/01-knot/run
 COPY supercronic-run.sh /output/etc/services.d/02-supercronic/run
+RUN chmod +x /output/etc/cont-init.d/01-entrypoint /output/etc/services.d/01-knot/run /output/etc/services.d/02-supercronic/run
 
 #==============================================================
 
