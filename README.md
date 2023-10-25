@@ -1,15 +1,14 @@
 [hub]: https://hub.docker.com/r/loxoo/knot
-[mbdg]: https://microbadger.com/images/loxoo/knot
-[git]: https://github.com/triptixx/knot
-[actions]: https://github.com/triptixx/knot/actions
+[git]: https://github.com/triptixx/knot/tree/master
+[actions]: https://github.com/triptixx/knot/actions/workflows/main.yml
 
-# [loxoo/knot][hub]
-[![Layers](https://images.microbadger.com/badges/image/loxoo/knot.svg)][mbdg]
-[![Latest Version](https://images.microbadger.com/badges/version/loxoo/knot.svg)][hub]
-[![Git Commit](https://images.microbadger.com/badges/commit/loxoo/knot.svg)][git]
+# [loxoo/knot-s6][hub]
+[![Git Commit](https://img.shields.io/github/last-commit/triptixx/knot/master)][git]
+[![Build Status](https://github.com/triptixx/knot/actions/workflows/main.yml/badge.svg?branch=master)][actions]
+[![Latest Version](https://img.shields.io/docker/v/loxoo/knot/latest)][hub]
+[![Size](https://img.shields.io/docker/image-size/loxoo/knot/latest)][hub]
 [![Docker Stars](https://img.shields.io/docker/stars/loxoo/knot.svg)][hub]
 [![Docker Pulls](https://img.shields.io/docker/pulls/loxoo/knot.svg)][hub]
-[![Build Status](https://github.com/triptixx/knot/workflows/docker%20build/badge.svg)][actions]
 
 ## Usage
 
