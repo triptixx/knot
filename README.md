@@ -2,7 +2,7 @@
 [git]: https://github.com/triptixx/knot/tree/master
 [actions]: https://github.com/triptixx/knot/actions/workflows/main.yml
 
-# [loxoo/knot-s6][hub]
+# [loxoo/knot][hub]
 [![Git Commit](https://img.shields.io/github/last-commit/triptixx/knot/master)][git]
 [![Build Status](https://github.com/triptixx/knot/actions/workflows/main.yml/badge.svg?branch=master)][actions]
 [![Latest Version](https://img.shields.io/docker/v/loxoo/knot/latest)][hub]
