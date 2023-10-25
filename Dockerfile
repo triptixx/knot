@@ -21,7 +21,7 @@ RUN apk add --no-cache build-base git autoconf automake libtool gnutls-dev users
                 --disable-fastparser \
                 --disable-static \
                 --disable-documentation; \
-    make; \
+    make -j$(nproc); \
     make install DESTDIR=/output; \
     rm -rf /output/rundir/* /output/storage/* /output/config/*; \
     find /output -exec sh -c 'file "{}" | grep -q ELF && strip --strip-debug "{}"' \;
