@@ -1,5 +1,5 @@
-ARG ALPINE_TAG=3.15
-ARG KNOT_VER=3.1.7
+ARG ALPINE_TAG=3.18
+ARG KNOT_VER=3.3.2
 
 FROM loxoo/alpine:${ALPINE_TAG} AS builder
 
@@ -21,7 +21,7 @@ RUN apk add --no-cache build-base git autoconf automake libtool gnutls-dev users
                 --disable-fastparser \
                 --disable-static \
                 --disable-documentation; \
-    make; \
+    make -j$(nproc); \
     make install DESTDIR=/output; \
     rm -rf /output/rundir/* /output/storage/* /output/config/*; \
     find /output -exec sh -c 'file "{}" | grep -q ELF && strip --strip-debug "{}"' \;
