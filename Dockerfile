@@ -29,8 +29,8 @@ RUN apk add --no-cache build-base git autoconf automake libtool gnutls-dev users
 ### install modules python
 WORKDIR /output
 RUN apk add py3-pip; \
-    pip install xmltodict; \
-    cp -a --parents /usr/lib/python*/site-packages/xmltodict* .
+    PY_VER=$(python -c "import sysconfig; print(sysconfig.get_path('purelib'))"); \
+    pip install -t /output/${PY_VER} xmltodict
 
 ### install supercronic
 WORKDIR /supercronic-src
