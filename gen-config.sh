@@ -49,6 +49,7 @@ policy:
     zsk-lifetime: 90d
     ksk-lifetime: 365d
     nsec3: on
+    nsec3-salt-length: 0
     ksk-submission: sub_ksk
 mod-rrl:
   - id: default
