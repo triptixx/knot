@@ -1,11 +1,11 @@
 ARG ALPINE_TAG=3.20
 ARG KNOT_VER=3.3.8
+ARG SUPERCRONIC_VER=0.2.30
 
 FROM loxoo/alpine:${ALPINE_TAG} AS builder
 
 ARG KNOT_VER
-ARG GOPATH=/supercronic-src
-ARG GO111MODULE=auto
+ARG SUPERCRONIC_VER
 
 ### install knot
 WORKDIR /knot-src
@@ -35,13 +35,7 @@ RUN apk add py3-pip; \
 ### install supercronic
 WORKDIR /supercronic-src
 RUN apk add --no-cache go upx; \
-    go get -d -u github.com/golang/dep; \
-    cd ${GOPATH}/src/github.com/golang/dep; \
-    DEP_LATEST=$(git describe --abbrev=0 --tags); \
-    git checkout $DEP_LATEST; \
-    go build -o ${GOPATH}/dep -ldflags="-X main.version=$DEP_LATEST" ./cmd/dep; \
-    go get -d -u github.com/aptible/supercronic; \
-    cd ${GOPATH}/src/github.com/aptible/supercronic; \
+    git clone https://github.com/aptible/supercronic.git --branch v${SUPERCRONIC_VER} --depth 1 .; \
     go mod vendor; \
     go build -ldflags "-s -w" -o /output/supercronic/supercronic; \
     upx /output/supercronic/supercronic
